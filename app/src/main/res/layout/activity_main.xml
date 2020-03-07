@@ -57,12 +57,22 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textColor="@color/primary_dark_text"
                         android:textSize="@dimen/display_34sp"
-                        android:gravity="center"
-                        android:text="₦23,000"/>
+                        android:gravity="center"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/bvnNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/display_16dp"
+                android:layout_marginBottom="@dimen/display_8dp"
+                android:layout_marginTop="@dimen/display_8dp"
+                android:textColor="@color/primary_dark_text"
+                android:textSize="@dimen/display_24sp"
+                android:text="BVN: "/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card2"

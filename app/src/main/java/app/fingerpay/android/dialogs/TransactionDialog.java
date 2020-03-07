@@ -1,13 +1,23 @@
 package app.fingerpay.android.dialogs;
 
+import android.app.Dialog;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
 
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
@@ -18,32 +28,78 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.Objects;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class TransactionDialog extends FingerprintManager.AuthenticationCallback{
+import app.fingerpay.android.R;
+
+public class TransactionDialog extends FingerprintManager.AuthenticationCallback {
 
     private FingerprintManager fingerprintManager;
     private KeyStore keyStore;
     private Cipher cipher;
     private String KEY_NAME = "AndroidKey";
     private Context context;
+    private String fingerPrint;
 
-    public TransactionDialog(Context context, FingerprintManager fingerprintManager){
+    private Dialog dialog;
+    private Window window;
+    private TextView ver;
+    private ImageView closeBtn, fPrint;
+
+    //TODO : Use bvn fingerPrint from json to validate and compare with that from the users input print
+
+    public TransactionDialog(Context context, FingerprintManager fingerprintManager, String fingerPrint) {
         this.context = context;
+        dialog = new Dialog(this.context);
+        window = dialog.getWindow();
         this.fingerprintManager = fingerprintManager;
+        this.fingerPrint = fingerPrint;
     }
 
-    public void transact(){
-        generateKey();
-
-        if (cipherInit()){
-            FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
-            startAuth(fingerprintManager, cryptoObject);
+    public void transact() {
+        if (window != null) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            window.setDimAmount(.7f);
         }
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_transaction);
+
+        try {
+
+            ver = dialog.findViewById(R.id.checkTxt);
+            closeBtn = dialog.findViewById(R.id.closePayBtn);
+            fPrint = dialog.findViewById(R.id.fingerPrint);
+
+            generateKey();
+
+            if (cipherInit()) {
+                FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
+                startAuth(fingerprintManager, cryptoObject);
+            }
+
+            closeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    closeDialog();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    private void closeDialog() {
+        dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        dialog.dismiss();
     }
 
     private void generateKey() {
@@ -82,9 +138,7 @@ public class TransactionDialog extends FingerprintManager.AuthenticationCallback
 
 
         try {
-
             keyStore.load(null);
-
             SecretKey key = (SecretKey) keyStore.getKey(KEY_NAME,
                     null);
 
@@ -100,7 +154,7 @@ public class TransactionDialog extends FingerprintManager.AuthenticationCallback
 
     }
 
-    private void startAuth(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject){
+    private void startAuth(FingerprintManager fingerprintManager, FingerprintManager.CryptoObject cryptoObject) {
         CancellationSignal cancellationSignal = new CancellationSignal();
         fingerprintManager.authenticate(cryptoObject, cancellationSignal, 0, this, null);
     }
@@ -122,28 +176,25 @@ public class TransactionDialog extends FingerprintManager.AuthenticationCallback
 
     @Override
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
-        this.update("You can now access the app.", true);
+        this.update("Success", true);
     }
 
     private void update(String s, boolean b) {
 
         Toast.makeText(context, "Working...", Toast.LENGTH_LONG).show();
 
-        /*TextView paraLabel = (TextView) ((Activity)context).findViewById(R.id.paraLabel);
-        ImageView imageView = (ImageView) ((Activity)context).findViewById(R.id.fingerprintImage);
+        //TODO : Obtain SHA print and compare the proceed to fund transfer
 
-        paraLabel.setText(s);
+        ver.setText(s);
 
         if(b == false){
-
-            paraLabel.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
+            ver.setTextColor(ContextCompat.getColor(context, R.color.colorAccent));
 
         } else {
+            ver.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+            fPrint.setImageResource(R.mipmap.ic_done);
 
-            paraLabel.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
-            imageView.setImageResource(R.mipmap.action_done);
-
-        } */
+        }
 
     }
 }

@@ -1,10 +1,18 @@
 {
-	
-			"BVN" : "12345678901",
-			"BVNFingerprint" : "rEytyudihsKHDJIUSmkJhgfrtIS79r32",
-			"FirstName" : "Henry",
-			"MiddleName" : "Wit",
-			"LastName": "Joe"
-			
-
+	"ID": "1111",
+	"BVN": "12345678901",
+	"BVNFingerprint": "rEytyudihsKHDJIUSmkJhgfrtIS79r32",
+	"FirstName": "Henry",
+	"MiddleName": "Wit",
+	"LastName": "Joe",
+	"Pin": "1234",
+	"PhoneNumber": "08122233334",
+	"Bank": "Trust Bank",
+	"Gender": "Male",
+	"NIN": "12345678",
+	"AccountBalance": "25000",
+	"AccountNumber": "00233366787",
+	"Nationality": "Nigerian",
+	"State": "Lagos",
+	"Title": "Mr"
 }

@@ -74,6 +74,7 @@
                 android:lineSpacingExtra="@dimen/display_4dp"/>
 
             <ImageView
+                android:id="@+id/fingerPrint"
                 android:layout_width="@dimen/display_160dp"
                 android:layout_height="@dimen/display_160dp"
                 android:src="@mipmap/ic_finger"
@@ -87,7 +88,7 @@
                 android:textSize="@dimen/display_20sp"
                 android:gravity="center"
                 android:textColor="@color/primary_dark_text"
-                android:text="Verified"
+                android:text="Verification"
                 android:lineSpacingExtra="@dimen/display_4dp"
                 android:layout_marginTop="@dimen/display_16dp"/>
 
