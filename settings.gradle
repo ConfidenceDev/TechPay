@@ -1,0 +1,2 @@
+rootProject.name='FingerPay'
+include ':app'

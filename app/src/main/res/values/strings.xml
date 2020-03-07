@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name" translatable="false">FingerPay</string>
+
+    <string name="no_internet">No internet connection</string>
+    <string name="internet_continue">You need Mobile Data or wifi connection to continue.</string>
+    <string name="ok">OK</string>
+    <string name="continue_txt">Continue</string>
+    <string name="account_balance">Account Balance</string>
+    <string name="naira_symbol">₦</string>
+    <string name="proceed">proceed</string>
+    <string name="confirm_transfer">Confirm Transfer</string>
+
+</resources>

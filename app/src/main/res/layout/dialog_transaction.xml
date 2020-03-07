@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/display_320dp"
+    android:layout_height="@dimen/display_400dp"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/display_32dp"
+    android:background="@color/grey500"
+    android:elevation="@dimen/display_2dp"
+    app:cardCornerRadius="@dimen/display_8dp"
+    app:cardElevation="@dimen/display_8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topPay"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/payText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/display_8dp"
+                android:layout_marginEnd="@dimen/display_8dp"
+                android:lineSpacingExtra="@dimen/display_4dp"
+                android:padding="@dimen/display_4dp"
+                android:text="@string/confirm_transfer"
+                android:textColor="@color/white"
+                android:textSize="@dimen/display_22sp"
+                app:layout_constraintEnd_toStartOf="@+id/closePayBtn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/closePayBtn"
+                android:layout_width="@dimen/display_40dp"
+                android:layout_height="@dimen/display_40dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/display_8dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:src="@mipmap/ic_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topPay"
+            android:padding="@dimen/display_8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/display_20sp"
+                android:gravity="center"
+                android:textColor="@color/primary_dark_text"
+                android:text="Place finger to confirm fund transfer"
+                android:lineSpacingExtra="@dimen/display_4dp"/>
+
+            <ImageView
+                android:layout_width="@dimen/display_160dp"
+                android:layout_height="@dimen/display_160dp"
+                android:src="@mipmap/ic_finger"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/display_16dp"/>
+
+            <TextView
+                android:id="@+id/checkTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/display_20sp"
+                android:gravity="center"
+                android:textColor="@color/primary_dark_text"
+                android:text="Verified"
+                android:lineSpacingExtra="@dimen/display_4dp"
+                android:layout_marginTop="@dimen/display_16dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
