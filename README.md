@@ -17,7 +17,7 @@
 [apk link](https://github.com/Dev-Geek/TechPay/tree/master/apk "Apk Link")
 
 # Contact
-For inquires, support, bug reports and suggestions send me a mail@: confidostic5@gmail.com
+For inquires, support, bug reports and suggestions send me a mail@: confidostic3@gmail.com
 
 * Facebook: Onisofien Eze
 * Twitter: @Onisofien1
